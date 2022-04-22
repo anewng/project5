@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/orderSubTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:text="@string/zeroPrice"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/orderSubTotalText"
+        app:layout_constraintStart_toEndOf="@+id/orderSubTotalText" />
+
+    <TextView
+        android:id="@+id/orderSalesTax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zeroPrice"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/orderSalesTaxText"
+        app:layout_constraintEnd_toEndOf="@+id/orderSubTotal" />
+
+    <TextView
+        android:id="@+id/orderTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zeroPrice"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/orderTotalText"
+        app:layout_constraintEnd_toEndOf="@+id/orderSalesTax" />
+
+    <TextView
+        android:id="@+id/orderSubTotalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/subTotalText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
+
+    <TextView
+        android:id="@+id/orderTotalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/total"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/orderSalesTaxText"
+        app:layout_constraintTop_toBottomOf="@+id/orderSalesTaxText" />
+
+    <TextView
+        android:id="@+id/orderSalesTaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/salesTax"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/orderSubTotalText"
+        app:layout_constraintTop_toBottomOf="@+id/orderSubTotalText" />
+
+    <Button
+        android:id="@+id/placeOrder"
+        android:layout_width="242dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/purple_200"
+        android:text="@string/placeOrder"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="641dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="122dp"
+        android:layout_height="112dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cart" />
+
+    <TextView
+        android:id="@+id/yourOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/yourOrder"
+        android:textColor="@color/purple_200"
+        android:textSize="48sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:layout_width="409dp"
+        android:layout_height="332dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="113dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
