@@ -8,6 +8,49 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="165dp"
+            android:layout_height="172dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="fitStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/donut"
+            tools:layout_editor_absoluteY="213dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="169dp"
+            android:layout_height="176dp"
+            android:layout_marginEnd="4dp"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/coffee"
+            tools:layout_editor_absoluteY="209dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="129dp"
+            android:layout_height="142dp"
+            android:layout_marginStart="44dp"
+            android:scaleType="fitStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/cart"
+            tools:layout_editor_absoluteY="427dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="128dp"
+            android:layout_height="138dp"
+            android:layout_marginEnd="48dp"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/clipboard"
+            tools:layout_editor_absoluteY="427dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
