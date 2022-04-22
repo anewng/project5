@@ -27,4 +27,5 @@
     <string name="salesTax">Sales Tax:</string>
     <string name="total">Total:</string>
     <string name="placeOrder">Place Order</string>
+    <string name="storeOrders">Store Orders</string>
 </resources>
