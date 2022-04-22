@@ -20,6 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.proj5.DonutActivity" >
+        </activity>
+        <activity android:name="com.example.proj5.CoffeeActivity" >
+        </activity>
+        <activity android:name="com.example.proj5.OrderActivity" >
+        </activity>
+        <activity android:name="com.example.proj5.StoreOrderActivity" >
+        </activity>
     </application>
 
 </manifest>

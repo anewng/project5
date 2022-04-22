@@ -1,4 +1,16 @@
 package com.example.proj5;
 
-public class CoffeeActivity {
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class CoffeeActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_coffee);
+        Intent intent = getIntent();
+
+    }
 }

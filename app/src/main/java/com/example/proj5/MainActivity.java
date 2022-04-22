@@ -27,10 +27,46 @@ public class MainActivity extends AppCompatActivity {
                 showDonutActivity(view);
             }
         });
+
+        binding.coffeeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCoffeeActivity(view);
+            }
+        });
+
+        binding.yourOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showOrderActivity(view);
+            }
+        });
+
+        binding.storeOrdersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showStoreOrderActivity(view);
+            }
+        });
     }
 
     public void showDonutActivity(View view) {
         Intent intent = new Intent(this, DonutActivity.class);
+        startActivity(intent);
+    }
+
+    public void showCoffeeActivity(View view) {
+        Intent intent = new Intent(this, CoffeeActivity.class);
+        startActivity(intent);
+    }
+
+    public void showOrderActivity(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
+    }
+
+    public void showStoreOrderActivity(View view) {
+        Intent intent = new Intent(this, StoreOrderActivity.class);
         startActivity(intent);
     }
 
