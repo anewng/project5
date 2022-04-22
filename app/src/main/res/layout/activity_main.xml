@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="16dp"
@@ -14,43 +15,60 @@
 
         <ImageButton
             android:id="@+id/imageButton2"
-            android:layout_width="165dp"
-            android:layout_height="172dp"
-            android:layout_marginStart="16dp"
-            android:scaleType="fitStart"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="252dp"
+            android:layout_height="185dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             app:srcCompat="@drawable/donut"
-            tools:layout_editor_absoluteY="213dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="169dp"
-            android:layout_height="176dp"
-            android:layout_marginEnd="4dp"
-            android:scaleType="fitStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/coffee"
-            tools:layout_editor_absoluteY="209dp" />
+            tools:layout_editor_absoluteX="60dp" />
 
         <ImageButton
             android:id="@+id/imageButton4"
             android:layout_width="129dp"
             android:layout_height="142dp"
-            android:layout_marginStart="44dp"
-            android:scaleType="fitStart"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/cart"
-            tools:layout_editor_absoluteY="427dp" />
+            app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+            app:srcCompat="@drawable/cart" />
 
         <ImageButton
             android:id="@+id/imageButton5"
             android:layout_width="128dp"
             android:layout_height="138dp"
-            android:layout_marginEnd="48dp"
-            android:scaleType="fitStart"
+            android:layout_marginEnd="60dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/clipboard"
-            tools:layout_editor_absoluteY="427dp" />
+            app:layout_constraintStart_toEndOf="@+id/imageButton4"
+            app:srcCompat="@drawable/clipboard" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="248dp"
+            android:layout_height="196dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+            app:srcCompat="@drawable/coffee"
+            tools:layout_editor_absoluteX="65dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="monospace"
+            android:text="@string/SlayCafeString"
+            android:textColor="@color/purple_200"
+            android:textSize="48sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
