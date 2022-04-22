@@ -1,4 +1,16 @@
 package com.example.proj5;
 
-public class DonutActivity {
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class DonutActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_donut);
+        Intent intent = getIntent();
+
+    }
 }
