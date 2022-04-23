@@ -1,12 +1,18 @@
 package com.example.proj5;
 
+import android.content.ClipData;
+import android.content.Context;
+import android.view.ViewGroup;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>{
-    private Context context; //need the context to inflate the layout
-    private ArrayList<Item> items; //need the data binding to each row of RecyclerView
+import java.util.ArrayList;
 
-    public ItemsAdapter(Context context, ArrayList<Item> items) {
+public class  DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>{
+    private Context context; //need the context to inflate the layout
+    private ArrayList<ClipData.Item> items; //need the data binding to each row of RecyclerView
+
+    public DonutAdapter(Context context, ArrayList<ClipData.Item> items) {
         this.context = context;
         this.items = items;
     }
@@ -17,9 +23,8 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
      * @param viewType
      * @return
      */
-    @NonNull
     @Override
-    public ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflate the row layout for the items
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);

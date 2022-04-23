@@ -1,5 +1,6 @@
 package com.example.proj5;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  Coffee addons can be added or removed.
  @author Annie Wang, Jasmine Flanders
  */
-public class Coffee extends MenuItem implements Customizable{
+public class Coffee extends MenuItem implements Customizable, Serializable {
     private static final double SHORT_PRICE = 1.69;
     private static final double TALL_PRICE = 2.09;
     private static final double GRANDE_PRICE = 2.49;
