@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         binding.coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("hey");
                 showCoffeeActivity(view);
             }
         });
