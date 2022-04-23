@@ -40,9 +40,9 @@ import java.util.ArrayList;
  */
 class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
     private Context context; //need the context to inflate the layout
-    private ArrayList<Donut> donuts; //need the data binding to each row of RecyclerView
+    private ArrayList<String> donuts; //need the data binding to each row of RecyclerView
 
-    public DonutAdapter(Context context, ArrayList<Donut> donuts) {
+    public DonutAdapter(Context context, ArrayList<String> donuts) {
         this.context = context;
         this.donuts = donuts;
     }
@@ -58,9 +58,9 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
     public DonutHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate the row layout for the items
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(, parent, false);
+        View view = inflater.inflate(R.layout.donut_layout, parent, false);
 
-        return new ItemsHolder(view);
+        return new DonutHolder(view);
     }
 
     /**
@@ -70,11 +70,9 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
      * @param position the index of the item in the list of items
      */
     @Override
-    public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DonutHolder holder, int position) {
         //assign values for each row
-        holder.tv_name.setText(items.get(position).getItemName());
-        holder.tv_price.setText(items.get(position).getUnitPrice());
-        holder.im_item.setImageResource(items.get(position).getImage());
+        holder.tv_name.setText(donuts.get(position));
     }
 
     /**
@@ -83,26 +81,21 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
      */
     @Override
     public int getItemCount() {
-        return items.size(); //number of MenuItem in the array list.
+        return donuts.size(); //number of MenuItem in the array list.
     }
 
     /**
      * Get the views from the row layout file, similar to the onCreate() method.
      */
-    public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_price;
-        private ImageView im_item;
-        private Button btn_add;
+    public static class DonutHolder extends RecyclerView.ViewHolder {
+        private TextView tv_name;
         private ConstraintLayout parentLayout; //this is the row layout
 
-        public ItemsHolder(@NonNull View itemView) {
+        public DonutHolder(@NonNull View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.tv_flavor);
-            tv_price = itemView.findViewById(R.id.tv_price);
-            im_item = itemView.findViewById(R.id.im_item);
-            btn_add = itemView.findViewById(R.id.btn_add);
+            tv_name = itemView.findViewById(R.id.donutFlavor);
             parentLayout = itemView.findViewById(R.id.rowLayout);
-            setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
+            //setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
             /* set onClickListener for the row layout,
              * clicking on a row will navigate to another Activity
@@ -110,9 +103,7 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(itemView.getContext(), ItemSelectedActivity.class);
-                    intent.putExtra("ITEM", tv_name.getText());
-                    itemView.getContext().startActivity(intent);
+                    //yas
                 }
             });
         }
@@ -122,7 +113,7 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
          * Clicking on the button will create an AlertDialog with the options of YES/NO.
          * @param itemView
          */
-        private void setAddButtonOnClick(@NonNull View itemView) {
+        /*private void setAddButtonOnClick(@NonNull View itemView) {
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -146,6 +137,6 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
                     dialog.show();
                 }
             });
-        }
+        }*/
     }
 }

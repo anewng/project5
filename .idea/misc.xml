@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/annie/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_coffee.xml" value="0.1453804347826087" />
-        <entry key="..\:/Users/annie/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.1453804347826087" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/activity_coffee.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/activity_donut.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/activity_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/activity_store_order.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/activity_your_order.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/jasmi/AndroidStudioProjects/project5/app/src/main/res/layout/donut_layout.xml" value="0.176" />
       </map>
     </option>
   </component>
