@@ -8,13 +8,43 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class  DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>{
-    private Context context; //need the context to inflate the layout
-    private ArrayList<ClipData.Item> items; //need the data binding to each row of RecyclerView
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-    public DonutAdapter(Context context, ArrayList<ClipData.Item> items) {
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+/**
+ * This is an Adapter class to be used to instantiate an adapter for the RecyclerView.
+ * Must extend RecyclerView.Adapter, which will enforce you to implement 3 methods:
+ *      1. onCreateViewHolder, 2. onBindViewHolder, and 3. getItemCount
+ *
+ * You must use the data type <thisClassName.yourHolderName>, in this example
+ * <ItemAdapter.ItemHolder>. This will enforce you to define a constructor for the
+ * ItemAdapter and an inner class ItemsHolder (a static class)
+ * The ItemsHolder class must extend RecyclerView.ViewHolder. In the constructor of this class,
+ * you do something similar to the onCreate() method in an Activity.
+ * @author Lily Chang
+ */
+class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
+    private Context context; //need the context to inflate the layout
+    private ArrayList<Donut> donuts; //need the data binding to each row of RecyclerView
+
+    public DonutAdapter(Context context, ArrayList<Donut> donuts) {
         this.context = context;
-        this.items = items;
+        this.donuts = donuts;
     }
 
     /**
@@ -23,11 +53,12 @@ public class  DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder
      * @param viewType
      * @return
      */
+    @NonNull
     @Override
-    public ItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DonutHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate the row layout for the items
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.row_view, parent, false);
+        View view = inflater.inflate(, parent, false);
 
         return new ItemsHolder(view);
     }
@@ -117,5 +148,4 @@ public class  DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder
             });
         }
     }
-
 }
