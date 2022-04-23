@@ -19,7 +19,6 @@ public class Coffee extends MenuItem implements Customizable{
 
     private static final double INVALID_CASE = -1;
 
-
     private String size;
     private int addOnCount;
     private ArrayList<String> addOns = new ArrayList<String>();
@@ -87,6 +86,7 @@ public class Coffee extends MenuItem implements Customizable{
      */
     @Override
     public boolean addObject(Object obj) {
+        System.out.println("adding object.....");
         String addOn = (String) obj;
         addOns.add(addOn);
         addOnCount++;
