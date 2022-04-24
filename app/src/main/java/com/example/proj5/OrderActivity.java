@@ -30,10 +30,40 @@ public class OrderActivity extends AppCompatActivity {
     private String [] yourOrderArray;
     private ArrayAdapter<String> adapter;
     private ListView yourOrders;
+    private AdapterView.OnItemClickListener yourOrdersOnClickListener
+            = new AdapterView.OnItemClickListener() {
+        /**
+         Anonymous inner class to implement the yourOrdersOnClickListener method
+         to register the listener
+         @param view the current view that is being clicked
+         */
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(OrderActivity.this);
+            alert.setTitle("Delete an Item");
+            alert.setMessage("delete item?");
+            //anonymous inner class to handle the onClick event of YES or NO.
+            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getApplicationContext(), "Deleted Item", Toast.LENGTH_LONG).show();
+                    removeSelected(i);
+                }
+            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            AlertDialog dialog = alert.create();
+            dialog.show();
+        }
+    };
     private TextView subTotal, salesTax, total;
-
     private Button placeOrder;
     private View.OnClickListener placeOrderOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the placeOrderOnClickListener method
+         to register the listener
+         @param v the current view that is being clicked
+         */
         @Override
         public void onClick(View v) {
             placeOrderButtonClicked();
@@ -46,7 +76,6 @@ public class OrderActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         Intent intent = getIntent();
@@ -61,27 +90,7 @@ public class OrderActivity extends AppCompatActivity {
 
         placeOrder = findViewById(R.id.placeOrder);
         placeOrder.setOnClickListener(placeOrderOnClickListener);
-
-        yourOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(OrderActivity.this);
-                alert.setTitle("Delete an Item");
-                alert.setMessage("delete item?");
-                //anonymous inner class to handle the onClick event of YES or NO.
-                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Deleted Item", Toast.LENGTH_LONG).show();
-                        removeSelected(i);
-                    }
-                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog dialog = alert.create();
-                dialog.show();
-            }
-        });
+        yourOrders.setOnItemClickListener(yourOrdersOnClickListener);
     }
 
     private void placeOrderButtonClicked() {
