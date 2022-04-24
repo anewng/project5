@@ -23,18 +23,47 @@ import java.text.DecimalFormat;
 public class DonutSelectedActivity extends AppCompatActivity {
     private TextView donutFlavorText, donutSubtotal;
     private Spinner spinner;
+    private AdapterView.OnItemSelectedListener spinnerOnClickListener
+            = new AdapterView.OnItemSelectedListener() {
+        /**
+         Callback method to be invoked when an item in this view has been selected.
+         @param adapterView The AdapterView where the selection happened
+         @param view The view within the AdapterView that was clicked
+         @param i The position of the view in the adapter
+         @param l The row id of the item that is selected
+         */
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            updateSubtotal();
+        }
+        /**
+         Callback method to be invoked when the selection disappears from this view.
+         @param adapterView The AdapterView that now contains no selected item.
+         */
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+        }
+    };
     private String[] quantity = {"Select quantity", "1", "2", "3", "4", "5"};
     private ArrayAdapter<String> adapter;
     private Button addToOrder;
-    private Donut donut;
-
     private View.OnClickListener addToOrderOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the addToOrderOnClickListener method
+         to register the listener
+         @param v the current view that is being clicked
+         */
         @Override
         public void onClick(View v) {
             addToOrderButtonClicked();
         }
     };
+    private Donut donut;
 
+    /**
+     The onCreate method configures preliminary settings to clarify GUI interactions.
+     @param savedInstanceState the Bundle object that stores information on the previous state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,20 +77,14 @@ public class DonutSelectedActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, quantity);
         spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                updateSubtotal();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+        spinner.setOnItemSelectedListener(spinnerOnClickListener);
         addToOrder = findViewById(R.id.addToOrder);
         addToOrder.setOnClickListener(addToOrderOnClickListener);
     }
 
+    /**
+     Adds the chosen donut order to the cart.
+     */
     private void addToOrderButtonClicked() {
         if(spinner.getSelectedItemPosition() == 0) return;
 
@@ -81,6 +104,9 @@ public class DonutSelectedActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     Updates the subtotal of the donut order based on user interactions.
+     */
     private void updateSubtotal() {
         double subtotal = 0;
         if (!spinner.getSelectedItem().toString().equals("Select quantity")) {
@@ -99,7 +125,10 @@ public class DonutSelectedActivity extends AppCompatActivity {
         donutSubtotal.setText(d.format(subtotal));
     }
 
-
+    /**
+     Sets the donut type based on user input in the GUI
+     @return String the type of the donut based on the selected flavor
+     */
     private String getDonutType(String flavor) {
         System.out.println(flavor);
         String type = "";

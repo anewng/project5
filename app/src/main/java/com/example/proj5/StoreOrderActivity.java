@@ -21,15 +21,45 @@ import java.util.StringTokenizer;
  @author Annie Wang, Jasmine Flanders
  */
 public class StoreOrderActivity extends AppCompatActivity {
+    private static final double SALES_TAX = 0.06625;
 
-    public static ArrayList<Order> orders = new ArrayList<Order>();
+    public static StoreOrders orders = new StoreOrders();
     private String [] orderArray;
     private ArrayAdapter<String> adapter;
     private ListView storeOrders;
-    private Order selectedOrder;
-    private int selectedOrderList;
-    private static final double SALES_TAX = 0.06625;
+    private AdapterView.OnItemClickListener storeOrdersOnClickListener
+            = new AdapterView.OnItemClickListener() {
+        /**
+         Callback method to be invoked when an item in this view has been clicked.
+         @param adapterView The AdapterView where the selection happened
+         @param view The view within the AdapterView that was clicked
+         @param i The position of the view in the adapter
+         @param l The row id of the item that is selected
+         */
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(StoreOrderActivity.this);
+            alert.setTitle("Delete an Order");
+            alert.setMessage("delete order?");
+            //anonymous inner class to handle the onClick event of YES or NO.
+            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getApplicationContext(), "Deleted Order", Toast.LENGTH_LONG).show();
+                    removeSelected(i);
+                }
+            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            AlertDialog dialog = alert.create();
+            dialog.show();
+        }
+    };
 
+    /**
+     The onCreate method configures preliminary settings to clarify GUI interactions.
+     @param savedInstanceState the Bundle object that stores information on the previous state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,39 +68,19 @@ public class StoreOrderActivity extends AppCompatActivity {
 
         storeOrders = findViewById(R.id.storeOrderDisplay);
         updateListView();
-
-        storeOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(StoreOrderActivity.this);
-                alert.setTitle("Delete an Order");
-                alert.setMessage("delete order?");
-                //anonymous inner class to handle the onClick event of YES or NO.
-                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Deleted Order", Toast.LENGTH_LONG).show();
-                        removeSelected(i);
-                    }
-                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog dialog = alert.create();
-                dialog.show();
-            }
-        });
+        storeOrders.setOnItemClickListener(storeOrdersOnClickListener);
     }
 
     /**
      Updates the list view display with all items in the current order.
      */
     public void updateListView(){
-        orderArray = new String[orders.size()];
+        orderArray = new String[orders.getOrders().size()];
         DecimalFormat d = new DecimalFormat("'$'#,##0.00");
-        for (int i = 0; i < orders.size(); i++){
-            double subtotal = orders.get(i).getSubtotal();
+        for (int i = 0; i < orders.getOrders().size(); i++){
+            double subtotal = orders.getOrders().get(i).getSubtotal();
             double salesTax = subtotal * SALES_TAX;
-            orderArray[i] = "ORDER #" + (i+1) + orders.get(i).toString() + "Subtotal: "
+            orderArray[i] = "ORDER #" + (i+1) + orders.getOrders().get(i).toString() + "Subtotal: "
                     + d.format(subtotal) +  "\nSales Tax: " + d.format(salesTax)
                     + "\nTotal: " + d.format(subtotal + salesTax);
         }
@@ -79,21 +89,12 @@ public class StoreOrderActivity extends AppCompatActivity {
         storeOrders.setAdapter(adapter);
     }
 
+    /**
+     Removes the selected item at the specified position and updates list view accordingly
+     @param position the position of the selected item in the ListView
+     */
     private void removeSelected(int position) {
-        StringTokenizer string = new StringTokenizer(storeOrders.getItemAtPosition(position).toString());
-        string.nextToken();
-        int orderNumber = Integer.parseInt(string.nextToken().substring(1));
-        selectedOrder = findSelectedOrder(orderNumber);
-        orders.remove(selectedOrderList);
+        orders.getOrders().remove(position);
         updateListView();
-    }
-
-    private Order findSelectedOrder(int selectedOrderNumber) {
-        for (int j = 0; j < orders.size(); j++) {
-            if (orders.get(j).getOrderNumber() == selectedOrderNumber) {
-                return orders.get(j);
-            }
-        }
-        return null;
     }
 }

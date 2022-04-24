@@ -95,6 +95,10 @@ public class Order implements Customizable {
         return false;
     }
 
+    /**
+     Converts the Order object into a String
+     @return String the String form of the Order
+     */
     public String toString(){
         String s = "\n";
         DecimalFormat d = new DecimalFormat("'$'#,##0.00");
@@ -105,7 +109,8 @@ public class Order implements Customizable {
     }
 
     /**
-     Calculates the raw, pre-tax subtotal of the order, according to the quantity and price of each menu item
+     Calculates the raw, pre-tax subtotal of the order, according to the quantity
+     and price of each menu item
      @return double the calculated subtotal.
      */
     public double getSubtotal(){
