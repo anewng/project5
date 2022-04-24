@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
 /**
- The DonutActivity class dictates the function of the order activity GUI.
+ The OrderActivity class dictates the function of the order activity GUI.
  @author Annie Wang, Jasmine Flanders
  */
 public class OrderActivity extends AppCompatActivity {
