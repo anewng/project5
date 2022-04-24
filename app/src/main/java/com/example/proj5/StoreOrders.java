@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class StoreOrders implements Customizable {
 
-    public static ArrayList<Order> orders;
+    private static ArrayList<Order> orders;
 
     /**
      Constructor creates a StoreOrder object.

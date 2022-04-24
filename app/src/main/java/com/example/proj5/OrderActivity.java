@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
 /**
- The DonutActivity class dictates the function of the order activity GUI.
+ The OrderActivity class dictates the function of the order activity GUI.
  @author Annie Wang, Jasmine Flanders
  */
 public class OrderActivity extends AppCompatActivity {
@@ -33,9 +33,11 @@ public class OrderActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener yourOrdersOnClickListener
             = new AdapterView.OnItemClickListener() {
         /**
-         Anonymous inner class to implement the yourOrdersOnClickListener method
-         to register the listener
-         @param view the current view that is being clicked
+        Callback method to be invoked when an item in this view has been clicked.
+        @param adapterView The AdapterView where the selection happened
+        @param view The view within the AdapterView that was clicked
+        @param i The position of the view in the adapter
+        @param l The row id of the item that is selected
          */
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -66,13 +68,22 @@ public class OrderActivity extends AppCompatActivity {
          */
         @Override
         public void onClick(View v) {
+            if(yourOrderArrayList.getOrderArray().size() == 0) {
+                Context context = getApplicationContext();
+                CharSequence text = "cart is empty";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                return;
+            }
             placeOrderButtonClicked();
         }
     };
 
     /**
-     * Initial setup for the Views and the adapter for the ListView
-     * @param savedInstanceState
+     The onCreate method configures preliminary settings to clarify GUI interactions.
+     @param savedInstanceState the Bundle object that stores information on the previous state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +104,13 @@ public class OrderActivity extends AppCompatActivity {
         yourOrders.setOnItemClickListener(yourOrdersOnClickListener);
     }
 
+    /**
+     Places the order into the directory of store orders and outputs a confirmation message.
+     */
     private void placeOrderButtonClicked() {
-        if(yourOrderArrayList.getOrderArray().size() == 0) {
-            Context context = getApplicationContext();
-            CharSequence text = "cart is empty";
-            int duration = Toast.LENGTH_SHORT;
+        if(yourOrderArrayList.getOrderArray().size() == 0) return;
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            return;
-        }
-        StoreOrderActivity.orders.add(yourOrderArrayList);
+        StoreOrderActivity.orders.getOrders().add(yourOrderArrayList);
 
         yourOrderArrayList = new Order();
         updateListView();
@@ -180,7 +187,6 @@ public class OrderActivity extends AppCompatActivity {
         updateTotals();
 
     }
-
 
     /**
      Searches the order list to find the index that corresponds with the item type and flavor size token
