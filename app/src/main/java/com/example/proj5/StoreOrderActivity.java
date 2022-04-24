@@ -16,6 +16,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+/**
+ The StoreOrderActivity class dictates the function of the store order activity GUI.
+ @author Annie Wang, Jasmine Flanders
+ */
 public class StoreOrderActivity extends AppCompatActivity {
 
     public static ArrayList<Order> orders = new ArrayList<Order>();
@@ -66,9 +70,9 @@ public class StoreOrderActivity extends AppCompatActivity {
         for (int i = 0; i < orders.size(); i++){
             double subtotal = orders.get(i).getSubtotal();
             double salesTax = subtotal * SALES_TAX;
-            orderArray[i] = "Order #" + (i+1) + orders.get(i).toString() + "subtotal: "
-                    + d.format(subtotal) +  "\nsales tax: " + d.format(salesTax)
-                    + "\ntotal: " + d.format(subtotal + salesTax);
+            orderArray[i] = "ORDER #" + (i+1) + orders.get(i).toString() + "Subtotal: "
+                    + d.format(subtotal) +  "\nSales Tax: " + d.format(salesTax)
+                    + "\nTotal: " + d.format(subtotal + salesTax);
         }
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, orderArray);
@@ -92,6 +96,4 @@ public class StoreOrderActivity extends AppCompatActivity {
         }
         return null;
     }
-
-
 }

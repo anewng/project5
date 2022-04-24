@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 
+/**
+ The CoffeeActivity class dictates the function of the coffee order activity GUI.
+ @author Annie Wang, Jasmine Flanders
+ */
 public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner spinner;
     private String[] sizes = {"Select a size", "Short", "Tall", "Grande", "Venti"};
@@ -25,6 +29,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Button clickButton;
     private TextView subtotalText;
 
+    /**
+     The onCreate method configures preliminary settings to clarify GUI interactions.
+     @param savedInstanceState the Bundle object that stores information on the previous state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +85,8 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         clickButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(spinner.getSelectedItemPosition() == 0) return;
+
                 coffee.setQuantity(1);
                 OrderActivity.yourOrderArrayList.getOrderArray().add(coffee);
                 milk.setChecked(false);
@@ -94,10 +104,19 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                finish();
             }
         });
     }
 
+    /**
+     Performs necessary actions when the item is selected in the spinner
+     @param parent
+     @param view
+     @param position
+     @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         updateSubtotalAndCoffee();

@@ -16,10 +16,9 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 
 /**
- * For demonstration purpose, this class is the Activity to be started when an item on the
- * RecyclerView was clicked
- * Get the name of the item from an intent extra. The text of the button is set to the item name.
- * @author Lily Chang
+ The DonutSelectedActivity class allows the user to order a quantity of
+ specific donuts in the selected donut flavor GUI.
+ @author Annie Wang, Jasmine Flanders
  */
 public class DonutSelectedActivity extends AppCompatActivity {
     private TextView donutFlavorText, donutSubtotal;
@@ -57,6 +56,8 @@ public class DonutSelectedActivity extends AppCompatActivity {
         addToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(spinner.getSelectedItemPosition() == 0) return;
+
                 String flavor = donutFlavorText.getText().toString();
                 String type = getDonutType(flavor);
                 if (type.compareTo("CakeDonut") == 0) {
@@ -67,7 +68,6 @@ public class DonutSelectedActivity extends AppCompatActivity {
                     donut = new YeastDonut(flavor);
                 }
                 donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
-                System.out.println(donut.toString());
                 OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
 
                 spinner.setSelection(0);
@@ -79,6 +79,8 @@ public class DonutSelectedActivity extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                finish();
             }
         });
 

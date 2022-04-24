@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
+/**
+ The DonutActivity class dictates the function of the general donut selection screen in the GUI.
+ @author Annie Wang, Jasmine Flanders
+ */
 public class DonutActivity extends AppCompatActivity {
     private ArrayList<String> donuts = new ArrayList<>();
     public RecyclerView recyclerView;

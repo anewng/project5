@@ -9,6 +9,10 @@ import android.view.View;
 
 import com.example.proj5.databinding.ActivityMainBinding;
 
+/**
+ The MainActivity class dictates the function of the main home screen in the GUI.
+ @author Annie Wang, Jasmine Flanders
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;

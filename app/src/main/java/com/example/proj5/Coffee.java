@@ -1,6 +1,5 @@
 package com.example.proj5;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -86,7 +85,6 @@ public class Coffee extends MenuItem implements Customizable{
      */
     @Override
     public boolean addObject(Object obj) {
-        System.out.println("adding object.....");
         String addOn = (String) obj;
         addOns.add(addOn);
         addOnCount++;

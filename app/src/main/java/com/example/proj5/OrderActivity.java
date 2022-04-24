@@ -18,6 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
+/**
+ The DonutActivity class dictates the function of the order activity GUI.
+ @author Annie Wang, Jasmine Flanders
+ */
 public class OrderActivity extends AppCompatActivity {
     private static final double SALES_TAX = 0.06625;
     private static final int AUTOMATIC_REMOVAL_INDEX = -1;
@@ -53,6 +57,8 @@ public class OrderActivity extends AppCompatActivity {
         clickButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(yourOrderArrayList.getOrderArray().size() == 0) return;
+
                 StoreOrderActivity.orders.add(yourOrderArrayList);
 
                 yourOrderArrayList = new Order();
@@ -65,6 +71,8 @@ public class OrderActivity extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                finish();
             }
         });
         yourOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,34 +131,6 @@ public class OrderActivity extends AppCompatActivity {
         String totalString = d.format(totalDouble);
         total.setText(totalString);
     }
-
-    /**
-     Adds to order to the cart based on user input in the GUI
-     @param event the method is executed when the user clicks the place order button
-     */
-    /*@FXML
-    protected void onPlaceOrderButtonClick(ActionEvent event) {
-        if (yourOrders.getItems().size() == 0) {
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            error.setContentText("No orders");
-            error.show();
-        } else {
-            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmation.setContentText("Confirm order");
-            Optional<ButtonType> result = confirmation.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                storeOrderViewController.getStoreOrderArrayList().addObject(yourOrderArrayList);
-                yourOrderArrayList = new Order();
-                yourOrders.getItems().clear();
-                subTotal.clear();
-                salesTax.clear();
-                total.clear();
-
-                Stage stage = (Stage) anchorPane.getScene().getWindow();
-                stage.close();
-            }
-        }
-    }*/
 
     /**
      Removes menu item from the order based on user input in the GUI
