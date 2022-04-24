@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
+import java.util.StringTokenizer;
 
 public class OrderActivity extends AppCompatActivity {
     private static final double SALES_TAX = 0.06625;
@@ -76,6 +77,26 @@ public class OrderActivity extends AppCompatActivity {
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Deleted Item", Toast.LENGTH_LONG).show();
+                        StringTokenizer string = new StringTokenizer(yourOrders.getSelectedItem().toString());
+                        String flavorSizeToken = "";
+                        String itemType = setItemType(string.nextToken());
+
+                        if(itemType.equals("Coffee")){
+                            flavorSizeToken = string.nextToken(); // getting coffee flavor
+                        } else if(itemType.equals("invalid item type")) {
+                            return;
+                        } else {
+                            string.nextToken();
+                            flavorSizeToken = string.nextToken(); //getting donut flavor
+                            flavorSizeToken = setDonutFlavor(flavorSizeToken);
+                        }
+
+                        int removalIndex = findRemovalIndex(itemType, flavorSizeToken);
+                        yourOrderArrayList.getOrderArray().remove(removalIndex);
+
+                        updateListView();
+                        updateTotals();
+
                     }
                 }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -154,35 +175,29 @@ public class OrderActivity extends AppCompatActivity {
      Removes menu item from the order based on user input in the GUI
      @param event the method is executed when the user clicks the remove selected item button
      */
-    /*@FXML
-    protected void onRemoveSelectedButtonClick(ActionEvent event) {
-        if (yourOrders.getSelectionModel().getSelectedItem() == null) {
-            Alert error = new Alert(Alert.AlertType.NONE);
-            error.setAlertType(Alert.AlertType.ERROR);
-            error.setContentText("No item selected");
-            error.show();
+    private void removeSelected() {
+        StringTokenizer string = new StringTokenizer(yourOrders.getSelectedItem().toString());
+        String flavorSizeToken = "";
+        String itemType = setItemType(string.nextToken());
+
+        if(itemType.equals("Coffee")){
+            flavorSizeToken = string.nextToken(); // getting coffee flavor
+        } else if(itemType.equals("invalid item type")) {
+            return;
         } else {
-            StringTokenizer string = new StringTokenizer(yourOrders.getSelectionModel().getSelectedItem().toString());
-            String flavorSizeToken = "";
-            String itemType = setItemType(string.nextToken());
-
-            if(itemType.equals("Coffee")){
-                flavorSizeToken = string.nextToken(); // getting coffee flavor
-            } else if(itemType.equals("invalid item type")) {
-                return;
-            } else {
-                string.nextToken();
-                flavorSizeToken = string.nextToken(); //getting donut flavor
-                flavorSizeToken = setDonutFlavor(flavorSizeToken);
-            }
-
-            int removalIndex = findRemovalIndex(itemType, flavorSizeToken);
-            yourOrderArrayList.getOrderArray().remove(removalIndex);
-
-            updateListView();
-            updateTotals();
+            string.nextToken();
+            flavorSizeToken = string.nextToken(); //getting donut flavor
+            flavorSizeToken = setDonutFlavor(flavorSizeToken);
         }
-    }*/
+
+        int removalIndex = findRemovalIndex(itemType, flavorSizeToken);
+        yourOrderArrayList.getOrderArray().remove(removalIndex);
+
+        updateListView();
+        updateTotals();
+
+    }
+
 
     /**
      Searches the order list to find the index that corresponds with the item type and flavor size token
@@ -233,6 +248,10 @@ public class OrderActivity extends AppCompatActivity {
             return "Blueberry Chiffon";
         } else if (thirdToken.equals("Raspberry")) {
             return "Raspberry Jam Swirl";
+        } else if (thirdToken.equals("Strawberry")) {
+            return "Strawberry Shortcake";
+        } else if (thirdToken.equals("Yeast")) {
+            return "Yeast Infection";
         } else {
             return thirdToken;
         }
