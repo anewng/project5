@@ -30,21 +30,18 @@ public class MainActivity extends AppCompatActivity {
                 showDonutActivity(view);
             }
         });
-
         binding.coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCoffeeActivity(view);
             }
         });
-
         binding.yourOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showOrderActivity(view);
             }
         });
-
         binding.storeOrdersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
