@@ -65,15 +65,6 @@ public class DonutSelectedActivity extends AppCompatActivity {
     private void addToOrderButtonClicked() {
         if(spinner.getSelectedItemPosition() == 0) return;
 
-        /*String flavor = donutFlavorText.getText().toString();
-        String type = getDonutType(flavor);
-        if (type.compareTo("CakeDonut") == 0) {
-            donut = new CakeDonut(flavor);
-        } else if (type.compareTo("DonutHole") == 0) {
-            donut = new DonutHole(flavor);
-        } else {
-            donut = new YeastDonut(flavor);
-        }*/
         donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
         OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
 
@@ -95,7 +86,7 @@ public class DonutSelectedActivity extends AppCompatActivity {
         if (!spinner.getSelectedItem().toString().equals("Select quantity")) {
             System.out.println(donutFlavorText.getText().toString());
             String type = getDonutType(donutFlavorText.getText().toString());
-            if (type.compareTo("Cake Donut") == 0) {
+            if (type.compareTo("CakeDonut") == 0) {
                 donut = new CakeDonut(donutFlavorText.getText().toString());
             } else if (type.compareTo("DonutHole") == 0) {
                 donut = new DonutHole(donutFlavorText.getText().toString());
