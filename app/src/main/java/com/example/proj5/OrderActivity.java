@@ -21,9 +21,10 @@ public class OrderActivity extends AppCompatActivity {
 
     public static Order yourOrderArrayList = new Order();
     private String [] yourOrderArray;
-    private ArrayList l = new ArrayList();
     private ArrayAdapter<String> adapter;
     private ListView yourOrders;
+
+    public static ArrayList l = new ArrayList();
 
     private TextView subTotal, salesTax, total;
 
@@ -51,12 +52,16 @@ public class OrderActivity extends AppCompatActivity {
         for(int i = 0; i < l.size(); i++){
             System.out.println(l.get(i));
         }
+        System.out.println("heyyy");
 
         //testing to see if it's putting out the same instance each time
         l.add("slay");
         l.add("yas");
         l.add("um");
 
+        for(int i = 0; i < l.size(); i++){
+            System.out.println(l.get(i));
+        }
     }
 
 
