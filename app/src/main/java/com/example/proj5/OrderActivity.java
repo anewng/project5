@@ -1,19 +1,21 @@
 package com.example.proj5;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.ObservableList;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.StringTokenizer;
 
 public class OrderActivity extends AppCompatActivity {
     private static final double SALES_TAX = 0.06625;
@@ -25,6 +27,7 @@ public class OrderActivity extends AppCompatActivity {
     private ListView yourOrders;
 
     private TextView subTotal, salesTax, total;
+    private Button clickButton;
 
     /**
      * Initial setup for the Views and the adapter for the ListView
@@ -32,19 +35,56 @@ public class OrderActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         Intent intent = getIntent();
 
-        //changing arraylist into array
-        updateListView();
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, yourOrderArray);
-        yourOrders.setAdapter(adapter);
-
         yourOrders = (ListView) findViewById(R.id.yourOrders);
-        //yourOrders.setOnItemClickListener(this); //register the listener for an OnItemClick event.
+        subTotal = findViewById(R.id.orderSubTotal);
+        salesTax = findViewById(R.id.orderSalesTax);
+        total = findViewById(R.id.orderTotal);
 
+        updateListView();
+        updateTotals();
+
+        clickButton = (Button) findViewById(R.id.placeOrder);
+        clickButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StoreOrderActivity.orders.add(yourOrderArrayList);
+
+                yourOrderArrayList = new Order();
+                updateListView();
+                updateTotals();
+
+                Context context = getApplicationContext();
+                CharSequence text = "Placed order";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+        yourOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(OrderActivity.this);
+                alert.setTitle("Delete an Item");
+                alert.setMessage("delete item?");
+                //anonymous inner class to handle the onClick event of YES or NO.
+                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Deleted Item", Toast.LENGTH_LONG).show();
+                    }
+                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
+            }
+        });
     }
 
     /**

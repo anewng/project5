@@ -1,5 +1,6 @@
 package com.example.proj5;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -92,6 +93,15 @@ public class Order implements Customizable {
             }
         }
         return false;
+    }
+
+    public String toString(){
+        String s = "\n";
+        DecimalFormat d = new DecimalFormat("'$'#,##0.00");
+        for (int i = 0; i < order.size(); i++) {
+            s += order.get(i).toString() + "\n";
+        }
+        return s;
     }
 
     /**

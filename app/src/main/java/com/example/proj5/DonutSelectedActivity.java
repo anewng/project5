@@ -27,6 +27,7 @@ public class DonutSelectedActivity extends AppCompatActivity {
     private String [] quantity = {"Select quantity", "1", "2", "3", "4", "5"};
     private ArrayAdapter<String> adapter;
     private Button addToOrder;
+    private Donut donut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,22 @@ public class DonutSelectedActivity extends AppCompatActivity {
         addToOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String flavor = donutFlavorText.getText().toString();
+                String type = getDonutType(flavor);
+                if (type.compareTo("CakeDonut") == 0) {
+                    donut = new CakeDonut(flavor);
+                } else if (type.compareTo("DonutHole") == 0) {
+                    donut = new DonutHole(flavor);
+                } else {
+                    donut = new YeastDonut(flavor);
+                }
+                donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
+                System.out.println(donut.toString());
+                OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
+
+                spinner.setSelection(0);
+                updateSubtotal();
+
                 Context context = getApplicationContext();
                 CharSequence text = "Donuts added to order";
                 int duration = Toast.LENGTH_SHORT;
@@ -85,13 +102,15 @@ public class DonutSelectedActivity extends AppCompatActivity {
         donutSubtotal.setText(d.format(subtotal));
     }
 
+
     private String getDonutType(String flavor) {
-        if (flavor == "Red Velvet" || flavor == "Blueberry Chiffon" || flavor == "Raspberry Jam Swirl" || flavor == "Strawberry Shortcake") {
+        if (flavor.compareTo("Red Velvet") == 0 || flavor.compareTo("Blueberry Chiffon") == 0|| flavor.compareTo("Raspberry Jam Swirl") == 0 || flavor.compareTo("Strawberry Shortcake") == 0) {
             return "CakeDonut";
-        } else if (flavor == "Yas" || flavor == "Slay" || flavor == "Purr" || flavor == "Periodt") {
+        } else if (flavor.compareTo("Yas") == 0 || flavor.compareTo("Slay") == 0 || flavor.compareTo("Purr") == 0 || flavor.compareTo("Periodt") == 0) {
             return "DonutHole";
         } else {
             return "YeastDonut";
         }
     }
+
 }

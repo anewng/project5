@@ -1,5 +1,8 @@
 package com.example.proj5;
 
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +13,7 @@ import java.util.ArrayList;
  */
 public class StoreOrders implements Customizable {
 
-    private ArrayList<Order> orders;
+    public static ArrayList<Order> orders;
 
     /**
      Constructor creates a StoreOrder object.

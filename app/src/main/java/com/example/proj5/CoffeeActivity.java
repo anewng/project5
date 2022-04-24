@@ -1,5 +1,6 @@
 package com.example.proj5;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,13 +23,14 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Coffee coffee = new Coffee();
     private CheckBox milk, cream, syrup, caramel, whippedCream;
     private Button clickButton;
+    private TextView subtotalText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        spinner = findViewById(R.id.sizeSpinner);
         setContentView(R.layout.activity_coffee);
         Intent intent = getIntent();
+        spinner = findViewById(R.id.sizeSpinner);
         adapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         spinner.setAdapter(adapter);
 
@@ -70,11 +73,11 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
             public void onClick(View view) { onWhippedCreamClick(view);}
         });
 
-        /*
         clickButton = (Button) findViewById(R.id.coffeeOrderButton);
         clickButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                coffee.setQuantity(1);
                 OrderActivity.yourOrderArrayList.getOrderArray().add(coffee);
                 milk.setChecked(false);
                 cream.setChecked(false);
@@ -84,8 +87,15 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
                 spinner.setSelection(0);
                 DecimalFormat d = new DecimalFormat("'$'#,##0.00");
                 subtotalText.setText(d.format(0));
+
+                Context context = getApplicationContext();
+                CharSequence text = "Coffee added to order";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
-        });*/
+        });
     }
 
     @Override
@@ -100,7 +110,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
      * Updates the subtotal text field and coffee order based on changes in the add-on checkboxes
      */
     private void updateSubtotalAndCoffee() {
-        TextView subtotalText = (TextView) findViewById(R.id.coffeeSubtotal);
+        subtotalText = (TextView) findViewById(R.id.coffeeSubtotal);
 
         DecimalFormat d = new DecimalFormat("'$'#,##0.00");
         double subTotal = 0;
