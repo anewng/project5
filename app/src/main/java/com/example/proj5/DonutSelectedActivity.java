@@ -2,13 +2,16 @@ package com.example.proj5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -21,8 +24,9 @@ import java.text.DecimalFormat;
 public class DonutSelectedActivity extends AppCompatActivity {
     private TextView donutFlavorText, donutSubtotal;
     private Spinner spinner;
-    private String [] quantity = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    private String [] quantity = {"Select quantity", "1", "2", "3", "4", "5"};
     private ArrayAdapter<String> adapter;
+    private Button addToOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +51,36 @@ public class DonutSelectedActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        addToOrder = findViewById(R.id.addToOrder);
+        addToOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getApplicationContext();
+                CharSequence text = "Donuts added to order";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
     }
 
     private void updateSubtotal() {
         double subtotal = 0;
-        String type = getDonutType(donutFlavorText.toString());
-        Donut donut;
-        if (type == "CakeDonut") {
-            donut = new CakeDonut(donutFlavorText.toString());
-        } else if (type == "DonutHole") {
-            donut = new DonutHole(donutFlavorText.toString());
-        } else {
-            donut = new YeastDonut(donutFlavorText.toString());
+        if (spinner.getSelectedItem().toString() != "Select quantity") {
+            String type = getDonutType(donutFlavorText.toString());
+            Donut donut;
+            if (type == "CakeDonut") {
+                donut = new CakeDonut(donutFlavorText.toString());
+            } else if (type == "DonutHole") {
+                donut = new DonutHole(donutFlavorText.toString());
+            } else {
+                donut = new YeastDonut(donutFlavorText.toString());
+            }
+            subtotal += (Integer.parseInt(spinner.getSelectedItem().toString()) * donut.itemPrice());
         }
-        subtotal += (Integer.parseInt(spinner.getSelectedItem().toString()) * donut.itemPrice());
         DecimalFormat d = new DecimalFormat("'$'#,##0.00");
         donutSubtotal.setText(d.format(subtotal));
     }

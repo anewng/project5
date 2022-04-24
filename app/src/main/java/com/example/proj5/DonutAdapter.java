@@ -104,27 +104,6 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
             });
         }
 
-        /*public void updateDonutSubtotal() {
-            double subtotal = 0;
-            RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
-            for (int i = 0; i < recyclerView.getAdapter().getItemCount(); i++) {
-                DonutHolder holder = (DonutHolder) recyclerView.findViewHolderForAdapterPosition(i);
-                String type = getDonutType(holder.flavor.getText().toString());
-                Donut donut;
-                if (type == "CakeDonut") {
-                    donut = new CakeDonut(holder.flavor.getText().toString());
-                } else if (type == "DonutHole") {
-                    donut = new DonutHole(holder.flavor.getText().toString());
-                } else {
-                    donut = new YeastDonut(holder.flavor.getText().toString());
-                }
-                //subtotal += (Integer.parseInt(holder.quantity.getText().toString()) * donut.itemPrice());
-            }
-            donutSubtotal = getActivity().findViewById(R.id.subTotal);
-            DecimalFormat d = new DecimalFormat("'$'#,##0.00");
-            donutSubtotal.setText(d.format(subtotal));
-        }*/
-
         private Activity getActivity() {
             Context context = parentLayout.getContext();
             while (context instanceof ContextWrapper) {
