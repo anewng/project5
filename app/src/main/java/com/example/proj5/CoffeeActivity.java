@@ -30,38 +30,64 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private TextView subtotalText;
 
     private View.OnClickListener milkOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the milkOnClickListener method to register the listener
+         @param view the current view that is being clicked
+         */
         @Override
         public void onClick(View view) {
             onMilkClick(view);
         }
     };
     private View.OnClickListener creamOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the creamOnClickListener method to register the listener
+         @param view the current view that is being clicked
+         */
         @Override
         public void onClick(View view) {
             onCreamClick(view);
         }
     };
     private View.OnClickListener syrupOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the syrupOnClickListener method to register the listener
+         @param view the current view that is being clicked
+         */
         @Override
         public void onClick(View view) {
             onSyrupClick(view);
         }
     };
     private View.OnClickListener caramelOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the caramelOnClickListener method to register the listener
+         @param view the current view that is being clicked
+         */
         @Override
         public void onClick(View view) {
             onCaramelClick(view);
         }
     };
     private View.OnClickListener whippedCreamOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the whippedCreamOnClickListener method to register
+         the listener
+         @param view the current view that is being clicked
+         */
         @Override
         public void onClick(View view) {
             onWhippedCreamClick(view);
         }
     };
     private View.OnClickListener clickButtonOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the clickButtonOnClickListener method to
+         register the listener
+         @param view the current view that is being clicked
+         */
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             if(spinner.getSelectedItemPosition() == 0) return;
 
             coffee.setQuantity(1);
@@ -85,6 +111,26 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
             finish();
         }
     };
+    private AdapterView.OnItemSelectedListener spinnerOnClickListener = new AdapterView.OnItemSelectedListener() {
+        /**
+         Callback method to be invoked when an item in this view has been selected.
+         @param adapterView The AdapterView where the selection happened
+         @param view The view within the AdapterView that was clicked
+         @param i The position of the view in the adapter
+         @param l The row id of the item that is selected
+         */
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            updateSubtotalAndCoffee();
+        }
+        /**
+         Callback method to be invoked when the selection disappears from this view.
+         @param adapterView The AdapterView that now contains no selected item.
+         */
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+        }
+    };
 
     /**
      The onCreate method configures preliminary settings to clarify GUI interactions.
@@ -99,26 +145,19 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         adapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                updateSubtotalAndCoffee();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+        spinner.setOnItemSelectedListener(spinnerOnClickListener);
 
         milk = (CheckBox) findViewById(R.id.milk);
         cream = (CheckBox) findViewById(R.id.cream);
         syrup = (CheckBox) findViewById(R.id.syrup);
         caramel = (CheckBox) findViewById(R.id.caramel);
         whippedCream = (CheckBox) findViewById(R.id.whippedCream);
+
         milk.setOnClickListener(milkOnClickListener);
-        cream.setOnClickListener(milkOnClickListener);
-        milk.setOnClickListener(milkOnClickListener);
-        milk.setOnClickListener(milkOnClickListener);
-        milk.setOnClickListener(milkOnClickListener);
+        cream.setOnClickListener(creamOnClickListener);
+        syrup.setOnClickListener(syrupOnClickListener);
+        caramel.setOnClickListener(caramelOnClickListener);
+        whippedCream.setOnClickListener(whippedCreamOnClickListener);
 
         clickButton = (Button) findViewById(R.id.coffeeOrderButton);
         clickButton.setOnClickListener(clickButtonOnClickListener);
@@ -126,15 +165,19 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
 
     /**
      Performs necessary actions when the item is selected in the spinner
-     @param parent
-     @param view
-     @param position
-     @param id
+     @param parent The AdapterView where the selection happened
+     @param view The view within the AdapterView that was clicked
+     @param position The position of the view in the adapter
+     @param id The row id of the item that is selected
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         updateSubtotalAndCoffee();
     }
+    /**
+     Callback method to be invoked when the selection disappears from this view.
+     @param parent The AdapterView that now contains no selected item.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
@@ -157,6 +200,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         subtotalText.setText(d.format(subTotal));
     }
 
+    /**
+     * Updates the coffee object based on the modifications to milk CheckBox
+     * @param view the current view that is being clicked
+     */
     public void onMilkClick(View view){
         if (milk.isChecked()) {
             coffee.addObject("milk");
@@ -166,6 +213,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         updateSubtotalAndCoffee();
     }
 
+    /**
+     * Updates the coffee object based on the modifications to cream CheckBox
+     * @param view the current view that is being clicked
+     */
     public void onCreamClick(View view){
         if (cream.isChecked()) {
             coffee.addObject("cream");
@@ -175,6 +226,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         updateSubtotalAndCoffee();
     }
 
+    /**
+     * Updates the coffee object based on the modifications to caramel CheckBox
+     * @param view the current view that is being clicked
+     */
     public void onCaramelClick(View view){
         if (caramel.isChecked()) {
             coffee.addObject("caramel");
@@ -184,6 +239,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         updateSubtotalAndCoffee();
     }
 
+    /**
+     * Updates the coffee object based on the modifications to syrup CheckBox
+     * @param view the current view that is being clicked
+     */
     public void onSyrupClick(View view){
         if (syrup.isChecked()) {
             coffee.addObject("syrup");
@@ -193,6 +252,10 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         updateSubtotalAndCoffee();
     }
 
+    /**
+     * Updates the coffee object based on the modifications to whipped cream CheckBox
+     * @param view the current view that is being clicked
+     */
     public void onWhippedCreamClick(View view){
         if (whippedCream.isChecked()) {
             coffee.addObject("whippedCream");

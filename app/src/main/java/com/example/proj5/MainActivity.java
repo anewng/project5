@@ -16,6 +16,46 @@ import com.example.proj5.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private View.OnClickListener donutOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the showDonutActivity method to register the listener
+         @param view the current view that is being clicked
+         */
+        @Override
+        public void onClick(View view) {
+            showDonutActivity(view);
+        }
+    };
+    private View.OnClickListener coffeeOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the showDonutActivity method to register the listener
+         @param view the current view that is being clicked
+         */
+        @Override
+        public void onClick(View view) {
+            showCoffeeActivity(view);
+        }
+    };
+    private View.OnClickListener yourOrderOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the showDonutActivity method to register the listener
+         @param view the current view that is being clicked
+         */
+        @Override
+        public void onClick(View view) {
+            showOrderActivity(view);
+        }
+    };
+    private View.OnClickListener storeOrdersOnClickListener = new View.OnClickListener() {
+        /**
+         Anonymous inner class to implement the showDonutActivity method to register the listener
+         @param view the current view that is being clicked
+         */
+        @Override
+        public void onClick(View view) {
+            showStoreOrderActivity(view);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,33 +64,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.donutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDonutActivity(view);
-            }
-        });
-
-        binding.coffeeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showCoffeeActivity(view);
-            }
-        });
-
-        binding.yourOrderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showOrderActivity(view);
-            }
-        });
-
-        binding.storeOrdersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showStoreOrderActivity(view);
-            }
-        });
+        binding.donutButton.setOnClickListener(donutOnClickListener);
+        binding.coffeeButton.setOnClickListener(coffeeOnClickListener);
+        binding.yourOrderButton.setOnClickListener(yourOrderOnClickListener);
+        binding.storeOrdersButton.setOnClickListener(storeOrdersOnClickListener);
     }
 
     public void showDonutActivity(View view) {
