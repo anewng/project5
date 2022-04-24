@@ -24,9 +24,11 @@
         </activity>
         <activity android:name="com.example.proj5.CoffeeActivity" >
         </activity>
-        <activity android:name="com.example.proj5.OrderActivity" >
+        <activity android:name="com.example.proj5.OrderActivity"
+            android:launchMode="singleTask" >
         </activity>
-        <activity android:name="com.example.proj5.StoreOrderActivity" >
+        <activity android:name="com.example.proj5.StoreOrderActivity"
+            android:launchMode="singleTask" >
         </activity>
     </application>
 
