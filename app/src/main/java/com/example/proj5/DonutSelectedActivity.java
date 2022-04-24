@@ -138,7 +138,6 @@ public class DonutSelectedActivity extends AppCompatActivity {
      @return String the type of the donut based on the selected flavor
      */
     private String getDonutType(String flavor) {
-        System.out.println(flavor);
         String type = "";
         if (flavor.compareTo("Red Velvet") == 0 || flavor.compareTo("Blueberry Chiffon") == 0|| flavor.compareTo("Raspberry Jam Swirl") == 0 || flavor.compareTo("Strawberry Shortcake") == 0) {
             type = "CakeDonut";

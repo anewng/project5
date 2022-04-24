@@ -15,6 +15,10 @@ public class DonutActivity extends AppCompatActivity {
     private ArrayList<String> donuts = new ArrayList<>();
     public RecyclerView recyclerView;
 
+    /**
+     The onCreate method configures preliminary settings to clarify GUI interactions.
+     @param savedInstanceState the Bundle object that stores information on the previous state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +29,14 @@ public class DonutActivity extends AppCompatActivity {
         RecyclerView rcview = findViewById(R.id.recyclerView);
         DonutAdapter adapter = new DonutAdapter(this, donuts); //create the adapter
         rcview.setAdapter(adapter); //bind the list of items to the RecyclerView
-        //use the LinearLayout for the RecyclerView
         rcview.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView = this.findViewById(R.id.recyclerView);
     }
 
+    /**
+     Adds flavors to the flavor list instance variable.
+     */
     private void initializeFlavorList() {
         donuts.add("Red Velvet");
         donuts.add("Blueberry Chiffon");
@@ -44,6 +50,5 @@ public class DonutActivity extends AppCompatActivity {
         donuts.add("E coli");
         donuts.add("Salmonella");
         donuts.add("Yeast Infection");
-        //also DEFINE THESE IN STRINGXML??
     }
 }
