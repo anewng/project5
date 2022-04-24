@@ -1,30 +1,26 @@
 package com.example.proj5;
 
-import android.content.ClipData;
+import android.app.Activity;
 import android.content.Context;
-import android.view.ViewGroup;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-
-import android.app.AlertDialog;
-import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.ViewGroup;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 /**
  * This is an Adapter class to be used to instantiate an adapter for the RecyclerView.
@@ -71,8 +67,7 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
      */
     @Override
     public void onBindViewHolder(@NonNull DonutHolder holder, int position) {
-        //assign values for each row
-        holder.tv_name.setText(donuts.get(position));
+        holder.flavor.setText(donuts.get(position));
     }
 
     /**
@@ -88,24 +83,57 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class DonutHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name;
-        private ConstraintLayout parentLayout; //this is the row layout
+        private TextView flavor;
+        private ConstraintLayout parentLayout;
+        private TextView donutSubtotal;
+        private Button addToOrder;
+
 
         public DonutHolder(@NonNull View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.donutFlavor);
+            flavor = itemView.findViewById(R.id.donutFlavor);
             parentLayout = itemView.findViewById(R.id.rowLayout);
-            //setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
-
-            /* set onClickListener for the row layout,
-             * clicking on a row will navigate to another Activity
-             */
+            //setAddButtonOnClick(itemView);
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //yas
+                    Intent intent = new Intent(itemView.getContext(), DonutSelectedActivity.class);
+                    intent.putExtra("ITEM", flavor.getText());
+                    itemView.getContext().startActivity(intent);
                 }
             });
+        }
+
+        /*public void updateDonutSubtotal() {
+            double subtotal = 0;
+            RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
+            for (int i = 0; i < recyclerView.getAdapter().getItemCount(); i++) {
+                DonutHolder holder = (DonutHolder) recyclerView.findViewHolderForAdapterPosition(i);
+                String type = getDonutType(holder.flavor.getText().toString());
+                Donut donut;
+                if (type == "CakeDonut") {
+                    donut = new CakeDonut(holder.flavor.getText().toString());
+                } else if (type == "DonutHole") {
+                    donut = new DonutHole(holder.flavor.getText().toString());
+                } else {
+                    donut = new YeastDonut(holder.flavor.getText().toString());
+                }
+                //subtotal += (Integer.parseInt(holder.quantity.getText().toString()) * donut.itemPrice());
+            }
+            donutSubtotal = getActivity().findViewById(R.id.subTotal);
+            DecimalFormat d = new DecimalFormat("'$'#,##0.00");
+            donutSubtotal.setText(d.format(subtotal));
+        }*/
+
+        private Activity getActivity() {
+            Context context = parentLayout.getContext();
+            while (context instanceof ContextWrapper) {
+                if (context instanceof Activity) {
+                    return (Activity)context;
+                }
+                context = ((ContextWrapper)context).getBaseContext();
+            }
+            return null;
         }
 
         /**
@@ -114,29 +142,28 @@ class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutHolder>{
          * @param itemView
          */
         /*private void setAddButtonOnClick(@NonNull View itemView) {
-            btn_add.setOnClickListener(new View.OnClickListener() {
+            addToOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
                     alert.setTitle("Add to order");
-                    alert.setMessage(tv_name.getText().toString());
+                    alert.setMessage(flavor.getText().toString());
                     //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+                                    flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
                         }
                         //handle the "NO" click
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
+                                    flavor.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
                         }
                     });
                     AlertDialog dialog = alert.create();
                     dialog.show();
                 }
-            });
-        }*/
+            });*/
+        }
     }
-}

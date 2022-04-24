@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.example.proj5.databinding.ActivityMainBinding;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;

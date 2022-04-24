@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="258dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/donut" />
+
+    <TextView
+        android:id="@+id/donutFlavorText"
+        android:layout_width="331dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/quantityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/quantity"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/donutFlavorText"
+        app:layout_constraintTop_toBottomOf="@+id/donutFlavorText" />
+
+    <Spinner
+        android:id="@+id/quantitySpinner"
+        android:layout_width="101dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="70dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quantityText"
+        app:layout_constraintStart_toEndOf="@+id/quantityText"
+        app:layout_constraintTop_toTopOf="@+id/quantityText" />
+
+    <TextView
+        android:id="@+id/donutSubtotalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/subTotalText"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/quantityText"
+        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+
+    <TextView
+        android:id="@+id/donutSubtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zeroPrice"
+        android:textColor="@color/purple_200"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/quantitySpinner"
+        app:layout_constraintStart_toStartOf="@+id/quantitySpinner"
+        app:layout_constraintTop_toTopOf="@+id/donutSubtotalText" />
+
+    <Button
+        android:id="@+id/addToOrder"
+        android:layout_width="315dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/purple_200"
+        android:text="@string/addToOrder"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/donutSubtotalText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

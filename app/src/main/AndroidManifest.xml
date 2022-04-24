@@ -30,6 +30,8 @@
         <activity android:name="com.example.proj5.StoreOrderActivity"
             android:launchMode="singleTask" >
         </activity>
+        <activity android:name="com.example.proj5.DonutSelectedActivity" >
+        </activity>
     </application>
 
 </manifest>

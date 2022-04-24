@@ -10,6 +10,7 @@ public class DonutHole extends Donut{
     private static final String FLAVOR_1 = "Yas";
     private static final String FLAVOR_2 = "Slay";
     private static final String FLAVOR_3 = "Purr";
+    private static final String FLAVOR_4 = "Periodt";
 
     private static final double HOLE_PRICE = 0.39;
 

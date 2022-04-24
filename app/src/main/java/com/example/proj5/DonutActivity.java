@@ -2,15 +2,14 @@ package com.example.proj5;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class DonutActivity extends AppCompatActivity {
     private ArrayList<String> donuts = new ArrayList<>();
+    public RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +24,22 @@ public class DonutActivity extends AppCompatActivity {
         //use the LinearLayout for the RecyclerView
         rcview.setLayoutManager(new LinearLayoutManager(this));
 
+        recyclerView = this.findViewById(R.id.recyclerView);
     }
 
     private void initializeFlavorList() {
         donuts.add("Red Velvet");
         donuts.add("Blueberry Chiffon");
-        donuts.add("Rasberry Jam Swirl");
+        donuts.add("Raspberry Jam Swirl");
+        donuts.add("Strawberry Shortcake");
         donuts.add("Yas");
         donuts.add("Slay");
-        donuts.add("Pur");
+        donuts.add("Purr");
+        donuts.add("Periodt");
         donuts.add("Fungi");
         donuts.add("E coli");
         donuts.add("Salmonella");
-        //add three more flavors
+        donuts.add("Yeast Infection");
         //also DEFINE THESE IN STRINGXML
     }
-
-
 }
