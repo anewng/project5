@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,14 +20,14 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private ArrayAdapter<String> adapter;
     private Coffee coffee = new Coffee();
     private CheckBox milk, cream, syrup, caramel, whippedCream;
-    private TextView subtotal;
+    private Button clickButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        spinner = findViewById(R.id.sizeSpinner);
         setContentView(R.layout.activity_coffee);
         Intent intent = getIntent();
-        spinner = findViewById(R.id.sizeSpinner);
         adapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         spinner.setAdapter(adapter);
 
@@ -68,6 +69,23 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View view) { onWhippedCreamClick(view);}
         });
+
+        /*
+        clickButton = (Button) findViewById(R.id.coffeeOrderButton);
+        clickButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OrderActivity.yourOrderArrayList.getOrderArray().add(coffee);
+                milk.setChecked(false);
+                cream.setChecked(false);
+                syrup.setChecked(false);
+                caramel.setChecked(false);
+                whippedCream.setChecked(false);
+                spinner.setSelection(0);
+                DecimalFormat d = new DecimalFormat("'$'#,##0.00");
+                subtotalText.setText(d.format(0));
+            }
+        });*/
     }
 
     @Override
@@ -83,6 +101,7 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
      */
     private void updateSubtotalAndCoffee() {
         TextView subtotalText = (TextView) findViewById(R.id.coffeeSubtotal);
+
         DecimalFormat d = new DecimalFormat("'$'#,##0.00");
         double subTotal = 0;
         String sizeChoice = spinner.getSelectedItem().toString();

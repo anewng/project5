@@ -24,8 +24,6 @@ public class OrderActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ListView yourOrders;
 
-    public static ArrayList l = new ArrayList();
-
     private TextView subTotal, salesTax, total;
 
     /**
@@ -39,41 +37,27 @@ public class OrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         //changing arraylist into array
+        updateListView();
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, yourOrderArray);
+        yourOrders.setAdapter(adapter);
+
+        yourOrders = (ListView) findViewById(R.id.yourOrders);
+        //yourOrders.setOnItemClickListener(this); //register the listener for an OnItemClick event.
+
+    }
+
+    /**
+     Updates the list view display with all items in the current order.
+     */
+    public void updateListView(){
         yourOrderArray = new String[yourOrderArrayList.getOrderArray().size()];
         for (int i = 0; i < yourOrderArrayList.getOrderArray().size(); i++){
             yourOrderArray[i] = yourOrderArrayList.getOrderArray().get(i).toString();
         }
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, yourOrderArray);
-        yourOrders = (ListView) findViewById(R.id.yourOrders);
-        //yourOrders.setOnItemClickListener(this); //register the listener for an OnItemClick event.
         yourOrders.setAdapter(adapter);
-
-        for(int i = 0; i < l.size(); i++){
-            System.out.println(l.get(i));
-        }
-        System.out.println("heyyy");
-
-        //testing to see if it's putting out the same instance each time
-        l.add("slay");
-        l.add("yas");
-        l.add("um");
-
-        for(int i = 0; i < l.size(); i++){
-            System.out.println(l.get(i));
-        }
-    }
-
-
-    /*
-    /**
-     Updates the list view display with all items in the current order.
-     */
-    /*public void updateListView(){
-        yourOrders.getItems().clear();
-        for(int i = 0; i < yourOrderArrayList.getOrderArray().size(); i ++){
-            yourOrders.getItems().add(yourOrderArrayList.getOrderArray().get(i).toString());
-        }
     }
 
     /**
