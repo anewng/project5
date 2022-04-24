@@ -19,7 +19,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
-            android:text="TextView"
+            android:text="@string/donutFlavor"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
