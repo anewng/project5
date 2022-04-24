@@ -46,7 +46,6 @@ public class StoreOrderActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(getApplicationContext(), "Deleted Order", Toast.LENGTH_LONG).show();
                     removeSelected(i);
-                    finish();
                 }
             }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
