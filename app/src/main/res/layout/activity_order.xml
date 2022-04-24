@@ -69,7 +69,7 @@
         android:layout_width="242dp"
         android:layout_height="45dp"
         android:layout_marginStart="75dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/purple_200"
         android:text="@string/placeOrder"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,8 +96,12 @@
 
     <ListView
         android:id="@+id/yourOrders"
-        android:layout_width="409dp"
-        android:layout_height="332dp"
+        android:layout_width="404dp"
+        android:layout_height="289dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderSubTotalText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
