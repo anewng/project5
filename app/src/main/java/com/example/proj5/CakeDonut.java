@@ -12,7 +12,6 @@ public class CakeDonut extends Donut{
     private static final String FLAVOR_2 = "Blueberry Chiffon";
     private static final String FLAVOR_3 = "Raspberry Jam Swirl";
     private static final String FLAVOR_4 = "Strawberry Shortcake";
-
     private static final double CAKE_PRICE = 1.79;
 
     /**

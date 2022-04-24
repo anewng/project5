@@ -44,6 +44,6 @@ public class DonutActivity extends AppCompatActivity {
         donuts.add("E coli");
         donuts.add("Salmonella");
         donuts.add("Yeast Infection");
-        //also DEFINE THESE IN STRINGXML
+        //also DEFINE THESE IN STRINGXML??
     }
 }

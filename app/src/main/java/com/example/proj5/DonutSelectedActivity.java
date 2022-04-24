@@ -65,7 +65,7 @@ public class DonutSelectedActivity extends AppCompatActivity {
     private void addToOrderButtonClicked() {
         if(spinner.getSelectedItemPosition() == 0) return;
 
-        String flavor = donutFlavorText.getText().toString();
+        /*String flavor = donutFlavorText.getText().toString();
         String type = getDonutType(flavor);
         if (type.compareTo("CakeDonut") == 0) {
             donut = new CakeDonut(flavor);
@@ -73,7 +73,7 @@ public class DonutSelectedActivity extends AppCompatActivity {
             donut = new DonutHole(flavor);
         } else {
             donut = new YeastDonut(flavor);
-        }
+        }*/
         donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
         OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
 
@@ -93,14 +93,13 @@ public class DonutSelectedActivity extends AppCompatActivity {
     private void updateSubtotal() {
         double subtotal = 0;
         if (spinner.getSelectedItem().toString() != "Select quantity") {
-            String type = getDonutType(donutFlavorText.toString());
-            Donut donut;
-            if (type == "CakeDonut") {
-                donut = new CakeDonut(donutFlavorText.toString());
-            } else if (type == "DonutHole") {
-                donut = new DonutHole(donutFlavorText.toString());
+            String type = getDonutType(donutFlavorText.getText().toString());
+            if (type.compareTo("Cake Donut") == 0) {
+                donut = new CakeDonut(donutFlavorText.getText().toString());
+            } else if (type.compareTo("DonutHole") == 0) {
+                donut = new DonutHole(donutFlavorText.getText().toString());
             } else {
-                donut = new YeastDonut(donutFlavorText.toString());
+                donut = new YeastDonut(donutFlavorText.getText().toString());
             }
             subtotal += (Integer.parseInt(spinner.getSelectedItem().toString()) * donut.itemPrice());
         }
@@ -110,13 +109,15 @@ public class DonutSelectedActivity extends AppCompatActivity {
 
 
     private String getDonutType(String flavor) {
+        String type = "";
         if (flavor.compareTo("Red Velvet") == 0 || flavor.compareTo("Blueberry Chiffon") == 0|| flavor.compareTo("Raspberry Jam Swirl") == 0 || flavor.compareTo("Strawberry Shortcake") == 0) {
-            return "CakeDonut";
+            type = "CakeDonut";
         } else if (flavor.compareTo("Yas") == 0 || flavor.compareTo("Slay") == 0 || flavor.compareTo("Purr") == 0 || flavor.compareTo("Periodt") == 0) {
-            return "DonutHole";
+            type = "DonutHole";
         } else {
-            return "YeastDonut";
+            type = "YeastDonut";
         }
+        return type;
     }
 
 }
