@@ -29,6 +29,63 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     private Button clickButton;
     private TextView subtotalText;
 
+    private View.OnClickListener milkOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onMilkClick(view);
+        }
+    };
+    private View.OnClickListener creamOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onCreamClick(view);
+        }
+    };
+    private View.OnClickListener syrupOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onSyrupClick(view);
+        }
+    };
+    private View.OnClickListener caramelOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onCaramelClick(view);
+        }
+    };
+    private View.OnClickListener whippedCreamOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onWhippedCreamClick(view);
+        }
+    };
+    private View.OnClickListener clickButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(spinner.getSelectedItemPosition() == 0) return;
+
+            coffee.setQuantity(1);
+            OrderActivity.yourOrderArrayList.getOrderArray().add(coffee);
+            milk.setChecked(false);
+            cream.setChecked(false);
+            syrup.setChecked(false);
+            caramel.setChecked(false);
+            whippedCream.setChecked(false);
+            spinner.setSelection(0);
+            DecimalFormat d = new DecimalFormat("'$'#,##0.00");
+            subtotalText.setText(d.format(0));
+
+            Context context = getApplicationContext();
+            CharSequence text = "Coffee added to order";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            finish();
+        }
+    };
+
     /**
      The onCreate method configures preliminary settings to clarify GUI interactions.
      @param savedInstanceState the Bundle object that stores information on the previous state
@@ -57,57 +114,14 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
         syrup = (CheckBox) findViewById(R.id.syrup);
         caramel = (CheckBox) findViewById(R.id.caramel);
         whippedCream = (CheckBox) findViewById(R.id.whippedCream);
-
-        milk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onMilkClick(view);
-            }
-        });
-        cream.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { onCreamClick(view);}
-        });
-        syrup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { onSyrupClick(view);}
-        });
-        caramel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { onCaramelClick(view);}
-        });
-        whippedCream.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { onWhippedCreamClick(view);}
-        });
+        milk.setOnClickListener(milkOnClickListener);
+        cream.setOnClickListener(milkOnClickListener);
+        milk.setOnClickListener(milkOnClickListener);
+        milk.setOnClickListener(milkOnClickListener);
+        milk.setOnClickListener(milkOnClickListener);
 
         clickButton = (Button) findViewById(R.id.coffeeOrderButton);
-        clickButton.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(spinner.getSelectedItemPosition() == 0) return;
-
-                coffee.setQuantity(1);
-                OrderActivity.yourOrderArrayList.getOrderArray().add(coffee);
-                milk.setChecked(false);
-                cream.setChecked(false);
-                syrup.setChecked(false);
-                caramel.setChecked(false);
-                whippedCream.setChecked(false);
-                spinner.setSelection(0);
-                DecimalFormat d = new DecimalFormat("'$'#,##0.00");
-                subtotalText.setText(d.format(0));
-
-                Context context = getApplicationContext();
-                CharSequence text = "Coffee added to order";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                finish();
-            }
-        });
+        clickButton.setOnClickListener(clickButtonOnClickListener);
     }
 
     /**

@@ -217,13 +217,4 @@ public class OrderActivity extends AppCompatActivity {
             return thirdToken;
         }
     }
-
-    /**
-     Connects the current controller with the store order view controller
-     @param controller the controller that is to be connected with the current one
-     */
-    /*public void setStoreOrderViewController(StoreOrderViewController controller) {
-        storeOrderViewController = controller;
-    }
-    */
 }
