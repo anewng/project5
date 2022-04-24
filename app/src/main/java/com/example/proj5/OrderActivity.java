@@ -44,7 +44,6 @@ public class OrderActivity extends AppCompatActivity {
             AlertDialog.Builder alert = new AlertDialog.Builder(OrderActivity.this);
             alert.setTitle("Delete an Item");
             alert.setMessage("delete item?");
-            //anonymous inner class to handle the onClick event of YES or NO.
             alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(getApplicationContext(), "Deleted Item", Toast.LENGTH_LONG).show();

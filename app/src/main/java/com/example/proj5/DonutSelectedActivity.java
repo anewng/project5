@@ -118,7 +118,6 @@ public class DonutSelectedActivity extends AppCompatActivity {
     private void updateSubtotal() {
         double subtotal = 0;
         if (!spinner.getSelectedItem().toString().equals("Select quantity")) {
-            System.out.println(donutFlavorText.getText().toString());
             String type = getDonutType(donutFlavorText.getText().toString());
             if (type.compareTo("CakeDonut") == 0) {
                 donut = new CakeDonut(donutFlavorText.getText().toString());
