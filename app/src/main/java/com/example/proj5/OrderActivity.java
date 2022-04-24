@@ -77,26 +77,7 @@ public class OrderActivity extends AppCompatActivity {
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Deleted Item", Toast.LENGTH_LONG).show();
-                        StringTokenizer string = new StringTokenizer(yourOrders.getSelectedItem().toString());
-                        String flavorSizeToken = "";
-                        String itemType = setItemType(string.nextToken());
-
-                        if(itemType.equals("Coffee")){
-                            flavorSizeToken = string.nextToken(); // getting coffee flavor
-                        } else if(itemType.equals("invalid item type")) {
-                            return;
-                        } else {
-                            string.nextToken();
-                            flavorSizeToken = string.nextToken(); //getting donut flavor
-                            flavorSizeToken = setDonutFlavor(flavorSizeToken);
-                        }
-
-                        int removalIndex = findRemovalIndex(itemType, flavorSizeToken);
-                        yourOrderArrayList.getOrderArray().remove(removalIndex);
-
-                        updateListView();
-                        updateTotals();
-
+                        removeSelected(i);
                     }
                 }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -173,10 +154,10 @@ public class OrderActivity extends AppCompatActivity {
 
     /**
      Removes menu item from the order based on user input in the GUI
-     @param event the method is executed when the user clicks the remove selected item button
+     @param position
      */
-    private void removeSelected() {
-        StringTokenizer string = new StringTokenizer(yourOrders.getSelectedItem().toString());
+    private void removeSelected(int position) {
+        StringTokenizer string = new StringTokenizer(yourOrders.getItemAtPosition(position).toString());
         String flavorSizeToken = "";
         String itemType = setItemType(string.nextToken());
 

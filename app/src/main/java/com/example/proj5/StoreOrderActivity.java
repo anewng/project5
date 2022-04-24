@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class StoreOrderActivity extends AppCompatActivity {
 
@@ -21,6 +22,8 @@ public class StoreOrderActivity extends AppCompatActivity {
     private String [] orderArray;
     private ArrayAdapter<String> adapter;
     private ListView storeOrders;
+    private Order selectedOrder;
+    private int selectedOrderList;
     private static final double SALES_TAX = 0.06625;
 
     @Override
@@ -42,6 +45,7 @@ public class StoreOrderActivity extends AppCompatActivity {
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Deleted Order", Toast.LENGTH_LONG).show();
+                        removeSelected(i);
                     }
                 }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -70,4 +74,24 @@ public class StoreOrderActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, orderArray);
         storeOrders.setAdapter(adapter);
     }
+
+    private void removeSelected(int position) {
+        StringTokenizer string = new StringTokenizer(storeOrders.getItemAtPosition(position).toString());
+        string.nextToken();
+        int orderNumber = Integer.parseInt(string.nextToken().substring(1));
+        selectedOrder = findSelectedOrder(orderNumber);
+        orders.remove(selectedOrderList);
+        updateListView();
+    }
+
+    private Order findSelectedOrder(int selectedOrderNumber) {
+        for (int j = 0; j < orders.size(); j++) {
+            if (orders.get(j).getOrderNumber() == selectedOrderNumber) {
+                return orders.get(j);
+            }
+        }
+        return null;
+    }
+
+
 }
