@@ -30,9 +30,15 @@ public class OrderActivity extends AppCompatActivity {
     private String [] yourOrderArray;
     private ArrayAdapter<String> adapter;
     private ListView yourOrders;
-
     private TextView subTotal, salesTax, total;
-    private Button clickButton;
+
+    private Button placeOrder;
+    private View.OnClickListener placeOrderOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            placeOrderButtonClicked();
+        }
+    };
 
     /**
      * Initial setup for the Views and the adapter for the ListView
@@ -53,28 +59,9 @@ public class OrderActivity extends AppCompatActivity {
         updateListView();
         updateTotals();
 
-        clickButton = (Button) findViewById(R.id.placeOrder);
-        clickButton.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(yourOrderArrayList.getOrderArray().size() == 0) return;
+        placeOrder = new Button(this);
+        placeOrder.setOnClickListener(placeOrderOnClickListener);
 
-                StoreOrderActivity.orders.add(yourOrderArrayList);
-
-                yourOrderArrayList = new Order();
-                updateListView();
-                updateTotals();
-
-                Context context = getApplicationContext();
-                CharSequence text = "Placed order";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                finish();
-            }
-        });
         yourOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -95,6 +82,25 @@ public class OrderActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    private void placeOrderButtonClicked() {
+        if(yourOrderArrayList.getOrderArray().size() == 0) return;
+
+        StoreOrderActivity.orders.add(yourOrderArrayList);
+
+        yourOrderArrayList = new Order();
+        updateListView();
+        updateTotals();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Placed order";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        finish();
     }
 
     /**
@@ -217,13 +223,4 @@ public class OrderActivity extends AppCompatActivity {
             return thirdToken;
         }
     }
-
-    /**
-     Connects the current controller with the store order view controller
-     @param controller the controller that is to be connected with the current one
-     */
-    /*public void setStoreOrderViewController(StoreOrderViewController controller) {
-        storeOrderViewController = controller;
-    }
-    */
 }

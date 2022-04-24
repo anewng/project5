@@ -23,10 +23,17 @@ import java.text.DecimalFormat;
 public class DonutSelectedActivity extends AppCompatActivity {
     private TextView donutFlavorText, donutSubtotal;
     private Spinner spinner;
-    private String [] quantity = {"Select quantity", "1", "2", "3", "4", "5"};
+    private String[] quantity = {"Select quantity", "1", "2", "3", "4", "5"};
     private ArrayAdapter<String> adapter;
     private Button addToOrder;
     private Donut donut;
+
+    private View.OnClickListener addToOrderOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            addToOrderButtonClicked();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,39 +58,36 @@ public class DonutSelectedActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        addToOrder = new Button(this);
+        addToOrder.setOnClickListener(addToOrderOnClickListener);
+    }
 
-        addToOrder = findViewById(R.id.addToOrder);
-        addToOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(spinner.getSelectedItemPosition() == 0) return;
+    private void addToOrderButtonClicked() {
+        if(spinner.getSelectedItemPosition() == 0) return;
 
-                String flavor = donutFlavorText.getText().toString();
-                String type = getDonutType(flavor);
-                if (type.compareTo("CakeDonut") == 0) {
-                    donut = new CakeDonut(flavor);
-                } else if (type.compareTo("DonutHole") == 0) {
-                    donut = new DonutHole(flavor);
-                } else {
-                    donut = new YeastDonut(flavor);
-                }
-                donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
-                OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
+        String flavor = donutFlavorText.getText().toString();
+        String type = getDonutType(flavor);
+        if (type.compareTo("CakeDonut") == 0) {
+            donut = new CakeDonut(flavor);
+        } else if (type.compareTo("DonutHole") == 0) {
+            donut = new DonutHole(flavor);
+        } else {
+            donut = new YeastDonut(flavor);
+        }
+        donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
+        OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
 
-                spinner.setSelection(0);
-                updateSubtotal();
+        spinner.setSelection(0);
+        updateSubtotal();
 
-                Context context = getApplicationContext();
-                CharSequence text = "Donuts added to order";
-                int duration = Toast.LENGTH_SHORT;
+        Context context = getApplicationContext();
+        CharSequence text = "Donuts added to order";
+        int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
-                finish();
-            }
-        });
-
+        finish();
     }
 
     private void updateSubtotal() {
