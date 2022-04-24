@@ -148,7 +148,6 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee);
-        Intent intent = getIntent();
         spinner = findViewById(R.id.sizeSpinner);
         adapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         spinner.setAdapter(adapter);

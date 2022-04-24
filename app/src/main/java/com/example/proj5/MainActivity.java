@@ -6,16 +6,19 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.ImageButton;
 
-import com.example.proj5.databinding.ActivityMainBinding;
 
 /**
  The MainActivity class dictates the function of the main home screen in the GUI.
  @author Annie Wang, Jasmine Flanders
  */
 public class MainActivity extends AppCompatActivity {
+    private ImageButton donutButton;
+    private ImageButton coffeeButton;
+    private ImageButton yourOrderButton;
+    private ImageButton storeOrdersButton;
 
-    private ActivityMainBinding binding;
     private View.OnClickListener donutOnClickListener = new View.OnClickListener() {
         /**
          Anonymous inner class to implement the showDonutActivity method to register the listener
@@ -65,13 +68,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
-        binding.donutButton.setOnClickListener(donutOnClickListener);
-        binding.coffeeButton.setOnClickListener(coffeeOnClickListener);
-        binding.yourOrderButton.setOnClickListener(yourOrderOnClickListener);
-        binding.storeOrdersButton.setOnClickListener(storeOrdersOnClickListener);
+        setContentView(R.layout.activity_main);
+        donutButton = findViewById(R.id.donutButton);
+        coffeeButton = findViewById(R.id.coffeeButton);
+        yourOrderButton = findViewById(R.id.yourOrderButton);
+        storeOrdersButton = findViewById(R.id.storeOrdersButton);
+
+        donutButton.setOnClickListener(donutOnClickListener);
+        coffeeButton.setOnClickListener(coffeeOnClickListener);
+        yourOrderButton.setOnClickListener(yourOrderOnClickListener);
+        storeOrdersButton.setOnClickListener(storeOrdersOnClickListener);
     }
 
     /**

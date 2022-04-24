@@ -2,7 +2,6 @@ package com.example.proj5;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,7 +87,6 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-        Intent intent = getIntent();
 
         yourOrders = (ListView) findViewById(R.id.yourOrders);
         subTotal = findViewById(R.id.orderSubTotal);

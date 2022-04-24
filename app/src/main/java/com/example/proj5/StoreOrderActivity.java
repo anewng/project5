@@ -1,7 +1,6 @@
 package com.example.proj5;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+
 
 /**
  The StoreOrderActivity class dictates the function of the store order activity GUI.
@@ -64,7 +62,6 @@ public class StoreOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_order);
-        Intent intent = getIntent();
 
         storeOrders = findViewById(R.id.storeOrderDisplay);
         updateListView();
