@@ -88,7 +88,15 @@ public class CoffeeActivity extends AppCompatActivity implements AdapterView.OnI
          */
         @Override
         public void onClick(View view) {
-            if(spinner.getSelectedItemPosition() == 0) return;
+            if(spinner.getSelectedItemPosition() == 0) {
+                Context context = getApplicationContext();
+                CharSequence text = "no size selected";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                return;
+            }
 
             coffee.setQuantity(1);
             OrderActivity.yourOrderArrayList.getOrderArray().add(coffee);

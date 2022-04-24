@@ -86,7 +86,15 @@ public class DonutSelectedActivity extends AppCompatActivity {
      Adds the chosen donut order to the cart.
      */
     private void addToOrderButtonClicked() {
-        if(spinner.getSelectedItemPosition() == 0) return;
+        if (spinner.getSelectedItemPosition() == 0) {
+            Context context = getApplicationContext();
+            CharSequence text = "no quantity selected";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
 
         donut.setQuantity(Integer.parseInt(spinner.getSelectedItem().toString()));
         OrderActivity.yourOrderArrayList.getOrderArray().add(donut);
