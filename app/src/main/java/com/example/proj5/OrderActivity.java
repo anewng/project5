@@ -59,7 +59,7 @@ public class OrderActivity extends AppCompatActivity {
         updateListView();
         updateTotals();
 
-        placeOrder = new Button(this);
+        placeOrder = findViewById(R.id.placeOrder);
         placeOrder.setOnClickListener(placeOrderOnClickListener);
 
         yourOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {

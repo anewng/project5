@@ -58,7 +58,7 @@ public class DonutSelectedActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        addToOrder = new Button(this);
+        addToOrder = findViewById(R.id.addToOrder);
         addToOrder.setOnClickListener(addToOrderOnClickListener);
     }
 
